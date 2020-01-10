@@ -2,7 +2,6 @@
 #include<string.h>
 
 int a[50],r = 0,z[50];
-
 void push(char incoming){
     if(r<50){
     a[r] = incoming;
@@ -12,7 +11,6 @@ void push(char incoming){
     }
 
 }
-
 char pop(){
     char popped;
     if(r > 0 ){
@@ -58,8 +56,7 @@ int main(){
     int i  = 0, j = 0;
     printf("Postfix Expression: \n");
     scanf("%s",inf);
-    push('(');
-    //strcat(inf,')');
+    push(')');
     item = inf[i];
     while(item != '\0')        
 	{
@@ -105,6 +102,5 @@ int main(){
 
     posf[j] = '\0'; 
     puts(posf);
-
 
 }
