@@ -100,7 +100,9 @@ int main(){
 		item = inf[i]; 
 	} 
 
-    posf[j] = '\0'; 
+    posf[j] = '\0';
+	printf("Final Answer: ");
     puts(posf);
+	
 
 }

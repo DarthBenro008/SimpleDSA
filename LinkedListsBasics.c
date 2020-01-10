@@ -8,7 +8,7 @@ struct node
     struct node *ptr;
 };
 typedef struct node NODE;
-NODE *head, *first, *temp = 0, *xop = 0;
+NODE *head, *first, *temp = 0, *xop = 0, *dop = 0;
 void insert()
 {
 
@@ -82,21 +82,41 @@ int search(struct node *head, int x)
     return 0;
 }
 
-void reverse(struct node* head) 
-{  
-    if (head == NULL) 
-       return; 
+void reverse(struct node *head)
+{
+    if (head == NULL)
+        return;
 
-    reverse(head->ptr); 
-    printf("%d  ", head->num); 
-} 
+    reverse(head->ptr);
+    printf("%d  ", head->num);
+}
+
+void delete (struct node **head_ref, int key)
+{
+    struct node *tempoo = *head_ref, *prev;
+    if (tempoo != NULL && tempoo->num == key)
+    {
+        *head_ref = tempoo->ptr;
+        free(tempoo);
+        return;
+    }
+    while (tempoo != NULL && tempoo->num != key)
+    {
+        prev = tempoo;
+        tempoo = tempoo->ptr;
+    }
+    if (tempoo == NULL)
+        return;
+    prev->num = tempoo->ptr;
+    free(tempoo);
+}
 int main()
 {
     insert();
     int checker = 1;
     while (checker != 0)
     {
-        printf("\nPlease Select Your option:\n1.Search\n2.Reverse Print\n3.Exit\n");
+        printf("\nPlease Select Your option:\n1.Search\n2.Reverse Print\n3.Delete\n4.Exit\n");
         int sel;
         scanf("%d", &sel);
         if (sel == 1)
@@ -107,7 +127,7 @@ int main()
             xop = temp;
             xop->ptr = 0;
             xop = first;
-            search(xop, ser) ? printf("Yes") : printf("No");
+            search(xop, ser) ? printf("Yes, Your Number is Present \n") : printf("No");
         }
         if (sel == 2)
         {
@@ -116,8 +136,21 @@ int main()
             xop = first;
             reverse(xop);
         }
-        if(sel ==3){checker = 0;}
-        
+        if (sel == 3)
+        {  
+            dop = temp;
+            dop->ptr = 0;
+            dop = first;
+            printf("\n Please Enter the number you want to be deleted: \n");
+            int delo;
+            scanf("%d", &delo);
+            delete (&dop, delo);
+            printf("Deleted Successfully!");
+        }
+        if (sel == 4)
+        {
+            checker = 0;
+        }
     }
     return 0;
 }
